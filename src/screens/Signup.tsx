@@ -2,11 +2,19 @@
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React, { useState } from "react";
-import { ImageBackground, StyleSheet, TouchableOpacity, View } from "react-native";
+import {
+  ImageBackground,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Alert,
+  ActivityIndicator,
+} from "react-native";
 import { Checkbox, Text, TextInput } from "react-native-paper";
 import GoogleAuthButton from "../components/GoogleAuthButton";
 import GradientButton from "../components/GradientButton";
 import type { RootStackParamList } from "../types/navigation";
+import { requestOtp } from "../services/api";
 
 type NavProp = NativeStackNavigationProp<RootStackParamList, "Signup">;
 
@@ -18,6 +26,29 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [agree, setAgree] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleSignUp = async () => {
+    // basic validation
+    if (!name.trim() || !email.trim()) {
+      return Alert.alert("Validation", "Please enter name and email.");
+    }
+    if (!agree) {
+      return Alert.alert("Terms", "Please accept Terms and Conditions.");
+    }
+
+    setLoading(true);
+    try {
+      const res = await requestOtp({ email: email.trim(), name: name.trim(), mobile: mobile.trim() });
+      // demo backend returns success + message
+      setLoading(false);
+      // navigate to OTP verify screen, pass email/name/mobile
+      navigation.navigate("OtpVerify", { email: email.trim(), name: name.trim(), mobile: mobile.trim() });
+    } catch (err: any) {
+      setLoading(false);
+      Alert.alert("Error", err?.message || "Failed to request OTP");
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -47,10 +78,13 @@ export default function Signup() {
               </Text>
             </View>
 
-            <GradientButton title="Sign Up" onPress={() => console.log("Sign Up pressed")} />
+            {loading ? (
+              <ActivityIndicator animating size="large" style={{ marginVertical: 12 }} />
+            ) : (
+              <GradientButton title="Sign Up" onPress={handleSignUp} disabled={!agree} />
+            )}
 
             <Text style={styles.or}>— Or —</Text>
-
             <GoogleAuthButton onPress={() => console.log("Google sign up")} />
 
             <View style={styles.footer}>
