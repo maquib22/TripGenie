@@ -1,6 +1,7 @@
 // src/screens/Login.tsx
 import { useNavigation } from "@react-navigation/native";
 import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
   Alert,
@@ -24,12 +25,11 @@ export default function Login() {
   const [remember, setRemember] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-   const onSignIn = () => {
-    console.log("Available routes:", navigation.getState().routeNames);
+  const router = useRouter();
 
-    navigation.replace("Home"); // 👈 use "Home"
+  const onSignIn = () => {
+    navigation.replace("Home");
   };
-  console.log("State:", navigation.getState());
   return (
     <View style={styles.container}>
       <ImageBackground

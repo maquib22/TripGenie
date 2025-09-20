@@ -1,9 +1,10 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import HomeScreen from "../screens/HomeScreen";
 import Login from "../screens/Login";
 import MainPage from "../screens/MainPage";
 import Signup from "../screens/Signup";
 import SplashScreen from "../screens/SplashScreen";
-import HomeTabs from "./HomeTabs";
+
 
 export type RootStackParamList = {
   Splash: undefined;
@@ -22,7 +23,7 @@ export default function RootStack() {
       <Stack.Screen name="MainPage" component={MainPage} />
       <Stack.Screen name="LogIn" component={Login} />
       <Stack.Screen name="Signup" component={Signup} />
-      <Stack.Screen name="Home" component={HomeTabs} />
+      <Stack.Screen name="Home" component={HomeScreen} /> 
     </Stack.Navigator>
   );
 }

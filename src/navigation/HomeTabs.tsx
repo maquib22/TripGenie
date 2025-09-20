@@ -3,9 +3,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import { Image } from "react-native";
 import HomeScreen from "../screens/HomeScreen";
-// import TrendingScreen from "../screens/TrendingScreen";
-// import TestimoniesScreen from "../screens/TestimoniesScreen";
-// import ProfileScreen from "../screens/ProfileScreen";
+import ProfileScreen from "../screens/ProfileScreen"; // create placeholder if you don't have it
+import TrendingScreen from "../screens/TrendingScreen"; // create placeholder if you don't have it
 
 const Tab = createBottomTabNavigator();
 
@@ -21,29 +20,23 @@ export default function HomeTabs() {
             icon = focused
               ? require("../../assets/images/icons/home-active.png")
               : require("../../assets/images/icons/home.png");
-          } 
-        //   else if (route.name === "Trending") {
-        //     icon = focused
-        //       ? require("../../assets/images/icons/trending-active.png")
-        //       : require("../../assets/images/icons/trending.png");
-        //   } else if (route.name === "Testimonies") {
-        //     icon = focused
-        //       ? require("../../assets/images/icons/test-active.png")
-        //       : require("../../assets/images/icons/test.png");
-        //   } else if (route.name === "Profile") {
-        //     icon = focused
-        //       ? require("../../assets/images/icons/profile-active.png")
-        //       : require("../../assets/images/icons/profile.png");
-        //   }
-          return <Image source={icon} style={{ width: 24, height: 24, resizeMode: "contain" }} />;
+          } else if (route.name === "Trending") {
+            icon = focused
+              ? require("../../assets/images/icons/trending-active.png")
+              : require("../../assets/images/icons/trending.png");
+          } else if (route.name === "Profile") {
+            icon = focused
+              ? require("../../assets/images/icons/profile-active.png")
+              : require("../../assets/images/icons/profile.png");
+          }
+          return <Image source={icon} style={{ width: 26, height: 26 }} />;
         },
-        tabBarStyle: { height: 60, borderTopLeftRadius: 20, borderTopRightRadius: 20 },
+        tabBarStyle: { height: 62, borderTopLeftRadius: 16, borderTopRightRadius: 16 },
       })}
     >
       <Tab.Screen name="HomeScreen" component={HomeScreen} />
-      {/* <Tab.Screen name="Trending" component={TrendingScreen} />
-      <Tab.Screen name="Testimonies" component={TestimoniesScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} /> */}
+      <Tab.Screen name="Trending" component={TrendingScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 }
