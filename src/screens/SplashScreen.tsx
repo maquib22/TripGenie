@@ -11,7 +11,7 @@ export default function SplashScreen() {
   const navigation = useNavigation<SplashNavProp>();
 
   useEffect(() => {
-    const t = setTimeout(() => navigation.replace("MainPage"), 1000);
+    const t = setTimeout(() => navigation.replace("MainPage"), 1500);
     return () => clearTimeout(t);
   }, [navigation]);
 

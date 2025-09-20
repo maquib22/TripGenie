@@ -6,4 +6,5 @@ export type RootStackParamList = {
   Signup: undefined;
   Home: undefined;
   HomeScreen: undefined;
+  OtpVerify: { email: string; name?: string; mobile?: string };
 };
