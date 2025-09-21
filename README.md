@@ -3,11 +3,6 @@
    git clone https://github.com/maquib22/TripGenie.git
 ```
 
-## Switch to Developemnt branch
-```Clone the project
-   git checkout devlopmnet
-```
-
 ## Get started
 
 1. Install dependencies
